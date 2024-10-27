@@ -38,21 +38,25 @@ gradient_data = []
 
 # Add a new row for gradient
 with st.form("gradient_form"):
-    t_min = st.number_input("Time (min)", min_value=0.0, step=0.1)
-    solvent_a_percent = st.number_input("Solvent A %", min_value=0.0, max_value=100.0, step=0.1)
-    solvent_b_percent = st.number_input("Solvent B %", min_value=0.0, max_value=100.0, step=0.1)
+    t_min = st.number_input("Time (min)", min_value=0.0, step=0.1, key="time")
+    solvent_a_percent = st.number_input("Solvent A %", min_value=0.0, max_value=100.0, step=0.1, key="solvent_a")
+    solvent_b_percent = st.number_input("Solvent B %", min_value=0.0, max_value=100.0, step=0.1, key="solvent_b")
     add_row_button = st.form_submit_button("Add Row")
 
-    # Add row to gradient data
+    # Add row to gradient data if 'Add Row' is clicked
     if add_row_button:
         gradient_data.append({"Time (min)": t_min, "Solvent A %": solvent_a_percent, "Solvent B %": solvent_b_percent})
         st.write("Gradient Program Updated")
 
-# Display gradient program table
+# Ensure gradient_df is defined even if there are no rows
 if gradient_data:
     gradient_df = pd.DataFrame(gradient_data)
-    st.write("Gradient Program:")
-    st.dataframe(gradient_df)
+else:
+    gradient_df = pd.DataFrame(columns=["Time (min)", "Solvent A %", "Solvent B %"])
+
+# Display gradient program table
+st.write("Gradient Program:")
+st.dataframe(gradient_df)
 
 # Submit button for final query
 if st.button("Submit Query"):
