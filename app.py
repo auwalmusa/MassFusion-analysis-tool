@@ -72,5 +72,3 @@ st.markdown("### Download Sample CSV File")
 st.write("You can use this sample file as a template for your input.")
 st.markdown("[Download Sample CSV](https://example.com/sample.csv)")
 
-# Optional: Link to user manual
-st.markdown("For detailed guidance, refer to the [Quantem User Manual](https://app.quantem.co/user_manual).")
